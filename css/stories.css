@@ -1,0 +1,71 @@
+/* Lists of stories */
+
+.stories-list {
+  margin: 20px 5px;
+}
+
+.stories-list > li {
+  color: gray;
+  font-size: 0.8rem;
+  margin: 10px 0;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+#stories-loading-msg {
+  font-weight: bold;
+  font-size: 150%;
+  margin: 20px 30px;
+}
+
+
+/* Individual stories */
+
+.story-link {
+  color: black;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  display: inline-block;
+  max-width: 90%; 
+}
+
+
+.story-link:hover {
+  text-decoration: none;
+}
+
+.story-author {
+  display: block;
+  color: green;
+  margin-left: 0;
+}
+
+.story-user {
+  display: block;
+  color: lightcoral;
+}
+
+
+/* Style for the checkbox to be visually hidden but still accessible */
+.favorite-checkbox {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+/* Use the label's ::before pseudo-element to display an outlined star */
+.favorite-checkbox + label::before {
+  content: '\2606'; /* Unicode for outlined star */
+  cursor: pointer;
+  font-size: 24px; /* Adjust based on your design */
+  display: inline-block;
+}
+
+/* Change to filled star when checkbox is checked */
+.favorite-checkbox:checked + label::before {
+  content: '\2605'; /* Unicode for filled star */
+  color: grey; /* Adjust color for checked (favorited) state */
+}
+
+
