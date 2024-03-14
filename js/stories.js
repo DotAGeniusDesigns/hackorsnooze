@@ -23,7 +23,7 @@ function generateStoryMarkup(story) {
   const canDelete = currentUser != null;
   const hostName = story.getHostName();
   const isFavorite = currentUser && currentUser.favorites.some(fav => fav.storyId === story.storyId);
-  const deleteBtnHTML = canDelete ? `<button class="delete-btn" data-story-id="${story.storyId}" aria-label="Delete story">X</button>` : '';
+  const deleteBtnHTML = (canDelete && story.username == currentUser.username) ? `<button class="delete-btn" data-story-id="${story.storyId}" aria-label="Delete story">X</button>` : '';
   const favoriteCheckboxHTML = currentUser ? `<input type="checkbox" class="favorite-checkbox" id="fav-${story.storyId}" ${isFavorite ? "checked" : ""} data-story-id="${story.storyId}"><label for="fav-${story.storyId}"></label>` : '';
 
   return $(`
@@ -60,7 +60,7 @@ function putStoriesOnPage() {
   $allStoriesList.show();
 }
 
-function addStoryToList(evt) {
+async function addStoryToList(evt) {
   console.debug("addStoryToList", evt);
   evt.preventDefault();
 
@@ -69,6 +69,7 @@ function addStoryToList(evt) {
   const url = $("#story-url").val();
   const story = new Story({ title, author, url });
 
+  await storyList.addStory(currentUser, { title, author, url});
   storyList.stories.unshift(story);
   putStoriesOnPage();
   $storyForm.hide();
